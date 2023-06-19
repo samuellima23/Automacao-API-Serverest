@@ -50,7 +50,6 @@ describe('Criação de usuário', () => {
           url: `https://serverest.dev/usuarios/${userId}`
         }).then((response) => {
           if (response.status === 200) {
-            const usuario = response.body
             expect(response.status).to.eq(200)
             expect(response.body).to.have.property('message', 'Registro excluído com sucesso')
           } else {
