@@ -3,7 +3,7 @@ describe('Criação de usuário', () => {
     let userId
     
     it('Cadastrando um novo usuário',() => {
-      cy.request('POST', 'https://serverest.dev/usuarios', {
+      cy.api('POST', 'https://serverest.dev/usuarios', {
         nome: 'Usuário de Teste',
         email: 'teste@example.com',
         password: 'senha123',
@@ -16,7 +16,7 @@ describe('Criação de usuário', () => {
     });
   
     it('Verificar se o usuário foi criado usando GET de todos os usuários', () => {
-      cy.request('GET', 'https://serverest.dev/usuarios')
+      cy.api('GET', 'https://serverest.dev/usuarios')
         .then((response) => {
             if (response.status === 200) {
                 const usuarios = response.body.usuarios
@@ -30,7 +30,7 @@ describe('Criação de usuário', () => {
     })
 
     it('Verificar se o usuário foi criado passando o id', () => {
-        cy.request({
+        cy.api({
           method: 'GET',
           url: `https://serverest.dev/usuarios/${userId}`
         }).then((response) => {
@@ -45,7 +45,7 @@ describe('Criação de usuário', () => {
       })
 
     it('Deletar o usuário passando o id', () => {
-        cy.request({
+        cy.api({
           method: 'DELETE',
           url: `https://serverest.dev/usuarios/${userId}`
         }).then((response) => {

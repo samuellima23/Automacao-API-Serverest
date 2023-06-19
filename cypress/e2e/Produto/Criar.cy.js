@@ -5,7 +5,7 @@ describe('Criação de produto', () => {
     let authToken;
 
     it('Cadastrando um novo usuário',() => {
-        cy.request('POST', 'https://serverest.dev/usuarios', {
+        cy.api('POST', 'https://serverest.dev/usuarios', {
           nome: 'Usuário de Teste',
           email: 'teste@example.com',
           password: 'senha123',
@@ -18,7 +18,7 @@ describe('Criação de produto', () => {
       });
 
     it('Enviar email e senha no login',() => {
-        cy.request({
+        cy.api({
             method: 'POST',
             url: 'https://serverest.dev/login', // URL da API
             failOnStatusCode: false,
@@ -38,7 +38,7 @@ describe('Criação de produto', () => {
         });
 
     it('Cadastrando um novo produto',() => {
-      cy.request({
+      cy.api({
         method: 'POST',
         url: 'https://serverest.dev/produtos',
         headers: {
@@ -59,7 +59,7 @@ describe('Criação de produto', () => {
     });
   
     it('Verificar se o produto foi criado usando GET de todos os produtos', () => {
-      cy.request('GET', 'https://serverest.dev/produtos')
+      cy.api('GET', 'https://serverest.dev/produtos')
         .then((response) => {
             if (response.status === 200) {
                 const produtos = response.body.produtos
@@ -73,7 +73,7 @@ describe('Criação de produto', () => {
     })
 
     it('Verificar se o produto foi criado passando o id', () => {
-        cy.request({
+        cy.api({
           method: 'GET',
           url: `https://serverest.dev/produtos/${produtoId}`
         }).then((response) => {
@@ -88,7 +88,7 @@ describe('Criação de produto', () => {
       })
 
     it('Deletar o produto passando o id', () => {
-        cy.request({
+        cy.api({
           method: 'DELETE',
           url: `https://serverest.dev/produtos/${produtoId}`,
           headers: {
@@ -106,7 +106,7 @@ describe('Criação de produto', () => {
       })
 
       it('Deletar o usuário passando o id', () => {
-        cy.request({
+        cy.api({
           method: 'DELETE',
           url: `https://serverest.dev/usuarios/${userId}`
         }).then((response) => {
